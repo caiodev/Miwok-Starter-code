@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="category_colors">Cores</string>
+    <string name="category_family">Membros da família</string>
+    <string name="category_numbers">Números</string>
+    <string name="category_phrases">Frases</string>
+    <string name="numberEight">Oito</string>
+    <string name="numberTwo">Dois</string>
+    <string name="numberThree">Três</string>
+    <string name="numberTen">Dez</string>
+    <string name="numberSix">Seis</string>
+    <string name="numberSeven">Sete</string>
+    <string name="numberOne">Um</string>
+    <string name="numberNine">Nove</string>
+    <string name="numberFour">Quatro</string>
+    <string name="numberFive">Cinco</string>
+    <string name="areYouComing">Você está vindo?</string>
+    <string name="black">Preto</string>
+    <string name="brown">Marrom</string>
+    <string name="comeHere">Venha aqui</string>
+    <string name="daughter">Filha</string>
+    <string name="father">Pai</string>
+    <string name="grandFather">Avô</string>
+    <string name="grandMother">Avó</string>
+    <string name="gray">Cinza</string>
+    <string name="green">Verde</string>
+    <string name="howAreYouFeeling">Como você está?</string>
+    <string name="iAmComing">Eu estou indo</string>
+    <string name="iAmFeelingGood">Eu estou me sentindo bem</string>
+    <string name="letsGo">Vamos Lá</string>
+    <string name="mother">Mãe</string>
+    <string name="mustardYellow">Amarelo mostarda</string>
+    <string name="myNameIs">Meu nome é</string>
+    <string name="olderBrother">Irmão mais velho</string>
+    <string name="olderSister">Irmã mais velha</string>
+    <string name="red">Vermelho</string>
+    <string name="son">Filho</string>
+    <string name="whatIsYourName">Qual seu nome?</string>
+    <string name="whereAreYouGoing">Aonde você está indo?</string>
+    <string name="white">Branco</string>
+    <string name="yesIAmComing">Sim, eu estou chegando</string>
+    <string name="youngerBrother">Imão mais novo</string>
+    <string name="youngerSister">Irmã mais nova</string>
+    <string name="dustyYellow">Amarelo empoeirado</string>
+</resources>
