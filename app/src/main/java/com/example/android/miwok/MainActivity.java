@@ -23,6 +23,15 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    private TextView numbers;
+    private Intent numbersIntent;
+    private TextView family;
+    private Intent familyIntent;
+    private TextView colors;
+    private Intent colorsIntent;
+    private TextView phrases;
+    private Intent phrasesIntent;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // Find the View that shows the numbers category
-        TextView numbers = (TextView) findViewById(R.id.numbers);
+        numbers = (TextView) findViewById(R.id.numbers);
         // Set a click listener on that View
         numbers.setOnClickListener(
 
@@ -40,13 +49,13 @@ public class MainActivity extends AppCompatActivity {
             // The code in this method will be executed when the numbers View is clicked on.
             @Override
             public void onClick(View view) {
-                Intent numbersIntent = new Intent(MainActivity.this, NumbersActivity.class);
+                numbersIntent = new Intent(MainActivity.this, NumbersActivity.class);
                 startActivity(numbersIntent);
             }
         });
 
         // Find the View that shows the family category
-        TextView family = (TextView) findViewById(R.id.family);
+        family = (TextView) findViewById(R.id.family);
         // Set a click listener on that View
         family.setOnClickListener(
 
@@ -56,14 +65,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Create a new intent to open the {@link FamilyActivity}
-                Intent familyIntent = new Intent(MainActivity.this, FamilyActivity.class);
+                familyIntent = new Intent(MainActivity.this, FamilyActivity.class);
                 // Start the new activity
                 startActivity(familyIntent);
             }
         });
 
         // Find the View that shows the colors category
-        TextView colors = (TextView) findViewById(R.id.colors);
+        colors = (TextView) findViewById(R.id.colors);
         // Set a click listener on that View
         colors.setOnClickListener(
 
@@ -73,14 +82,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Create a new intent to open the {@link ColorsActivity}
-                Intent colorsIntent = new Intent(MainActivity.this, ColorsActivity.class);
+                colorsIntent = new Intent(MainActivity.this, ColorsActivity.class);
                 // Start the new activity
                 startActivity(colorsIntent);
             }
         });
 
         // Find the View that shows the phrases category
-        TextView phrases = (TextView) findViewById(R.id.phrases);
+        phrases = (TextView) findViewById(R.id.phrases);
         // Set a click listener on that View
         phrases.setOnClickListener(
 
@@ -90,34 +99,16 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Create a new intent to open the {@link PhrasesActivity}
-                Intent phrasesIntent = new Intent(MainActivity.this, PhrasesActivity.class);
+                phrasesIntent = new Intent(MainActivity.this, PhrasesActivity.class);
                 // Start the new activity
                 startActivity(phrasesIntent);
             }
         });
     }
-}
 
-//    void openNumbersList(View v){
-//
-//        Intent i = new Intent(this, NumbersActivity.class);
-//        startActivity(i);
-//    }
-//
-//    void openFamilyMembersActivity(View v){
-//
-//        Intent i = new Intent(this, FamilyActivity.class);
-//        startActivity(i);
-//    }
-//
-//    void openColorsActivity(View v){
-//
-//        Intent i = new Intent(this, ColorsActivity.class);
-//        startActivity(i);
-//    }
-//
-//    void openPhrasesActivity(View v){
-//
-//        Intent i = new Intent(this, PhrasesActivity.class);
-//        startActivity(i);
-//    }
+    void populateView(View v){
+
+        Intent i = new Intent(this, PhrasesActivity.class);
+        startActivity(i);
+    }
+}
