@@ -101,26 +101,3 @@ public class MainActivity extends AppCompatActivity {
     }
 }
 
-//    void openNumbersList(View v){
-//
-//        Intent i = new Intent(this, NumbersActivity.class);
-//        startActivity(i);
-//    }
-//
-//    void openFamilyMembersActivity(View v){
-//
-//        Intent i = new Intent(this, FamilyActivity.class);
-//        startActivity(i);
-//    }
-//
-//    void openColorsActivity(View v){
-//
-//        Intent i = new Intent(this, ColorsActivity.class);
-//        startActivity(i);
-//    }
-//
-//    void openPhrasesActivity(View v){
-//
-//        Intent i = new Intent(this, PhrasesActivity.class);
-//        startActivity(i);
-//    }
