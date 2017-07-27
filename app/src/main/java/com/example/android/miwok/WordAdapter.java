@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -63,7 +64,7 @@ class WordAdapter extends ArrayAdapter<Word>{
         englishTextView.setText(currentWord.getDefaultTranslation());
 
         // Set the theme color for the list item
-        View textContainer = listItemView.findViewById(R.id.text_Container);
+        RelativeLayout textContainer = (RelativeLayout) listItemView.findViewById(R.id.text_and_image_container);
         // Find the color that the resource ID maps to
         int color = ContextCompat.getColor(getContext(), mColorResourceId);
         // Set the background color of the text container View

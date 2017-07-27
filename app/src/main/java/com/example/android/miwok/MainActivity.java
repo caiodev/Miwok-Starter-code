@@ -15,6 +15,7 @@
  */
 package com.example.android.miwok;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -24,6 +25,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     private TextView numbers;
+<<<<<<< HEAD
     private Intent numbersIntent;
     private TextView family;
     private Intent familyIntent;
@@ -31,14 +33,18 @@ public class MainActivity extends AppCompatActivity {
     private Intent colorsIntent;
     private TextView phrases;
     private Intent phrasesIntent;
+=======
+    private TextView family;
+    private TextView colors;
+    private TextView phrases;
+>>>>>>> master
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // Set the content of the activity to use the activity_main.xml layout file
         setContentView(R.layout.activity_main);
 
+<<<<<<< HEAD
         // Find the View that shows the numbers category
         numbers = (TextView) findViewById(R.id.numbers);
         // Set a click listener on that View
@@ -90,17 +96,34 @@ public class MainActivity extends AppCompatActivity {
         // Set a click listener on that View
         phrases.setOnClickListener(
                 new View.OnClickListener() {
+=======
+        populateView(numbers, R.id.numbers, NumbersActivity.class);
+        populateView(family, R.id.family, FamilyActivity.class);
+        populateView(colors, R.id.colors, ColorsActivity.class);
+        populateView(phrases, R.id.phrases, PhrasesActivity.class);
+    }
 
-            // The code in this method will be executed when the phrases category is clicked on.
+    void populateView(TextView textView, int viewId, final Class<? extends Activity> ActivityToOpen){
+>>>>>>> master
+
+        textView = (TextView) findViewById(viewId);
+        textView.setOnClickListener(new View.OnClickListener() {
             @Override
+<<<<<<< HEAD
             public void onClick(View view) {
                 // Create a new intent to open the {@link PhrasesActivity}
                 phrasesIntent = new Intent(getApplicationContext(), PhrasesActivity.class);
+=======
+            public void onClick(View v) {
+                // Create a new intent to open the current activity
+                Intent intent = new Intent(getApplicationContext(), ActivityToOpen);
+>>>>>>> master
                 // Start the new activity
-                startActivity(phrasesIntent);
+                startActivity(intent);
             }
         });
     }
+<<<<<<< HEAD
 
 //    void populateView(TextView textView, int viewId, final Class<? extends Activity> ActivityToOpen){
 //
@@ -114,4 +137,6 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 //    }
+=======
+>>>>>>> master
 }
