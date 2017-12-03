@@ -11,66 +11,83 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class PhrasesActivity extends AppCompatActivity {
 
+    //Views
+    @BindView(R.id.word_list)
+    protected ListView listView;
+
+    //Attribute
     private ArrayList<Word> mWords;
-    private ListView mListView;
     private MediaPlayer mMediaPlayer;
     private AudioManager mAudioManager;
-    AudioManager.OnAudioFocusChangeListener mOnAudioFocusChangeListener = new AudioManager.OnAudioFocusChangeListener() {
-        @Override
-        public void onAudioFocusChange(int focusChange) {
-
-            if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT ||
-                    focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
-                // Pause playback
-                mMediaPlayer.pause();
-                mMediaPlayer.seekTo(0);
-
-            } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
-                // Resume playback
-                mMediaPlayer.start();
-
-            } else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
-                // Stop playback
-                releaseMediaPlayer();
-            }
-        }
-    };
-    private MediaPlayer.OnCompletionListener mCompletionListener = new MediaPlayer.OnCompletionListener() {
-        @Override
-        public void onCompletion(MediaPlayer mp) {
-            releaseMediaPlayer();
-        }
-    };
+    private AudioManager.OnAudioFocusChangeListener mOnAudioFocusChangeListener;
+    private MediaPlayer.OnCompletionListener mCompletionListener;
+    private WordAdapter mAdapter;
+    private Word mWord;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.word_list);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
+        ButterKnife.bind(this);
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
+
+        mOnAudioFocusChangeListener = new AudioManager.OnAudioFocusChangeListener() {
+            @Override
+            public void onAudioFocusChange(int focusChange) {
+
+                if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT ||
+                        focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
+                    // Pause playback
+                    mMediaPlayer.pause();
+                    mMediaPlayer.seekTo(0);
+
+                } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
+                    // Resume playback
+                    mMediaPlayer.start();
+
+                } else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
+                    // Stop playback
+                    releaseMediaPlayer();
+                }
+            }
+        };
+
+        mCompletionListener = new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                releaseMediaPlayer();
+            }
+        };
 
         // Create and setup the (@link AudioManager) to request audio focus
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         mWords = new ArrayList<>();
-        mListView = (ListView) findViewById(R.id.wordList);
 
-        mWords.add(new Word(getString(R.string.whereAreYouGoingInMiwok), getString(R.string.whereAreYouGoing), R.raw.phrase_where_are_you_going));
-        mWords.add(new Word(getString(R.string.whatIsYourNameInMiwok), getString(R.string.whatIsYourName), R.raw.phrase_what_is_your_name));
-        mWords.add(new Word(getString(R.string.myNameIsInMiwok), getString(R.string.myNameIs), R.raw.phrase_my_name_is));
-        mWords.add(new Word(getString(R.string.howAreYouFeelingInMiwok), getString(R.string.howAreYouFeeling), R.raw.phrase_how_are_you_feeling));
-        mWords.add(new Word(getString(R.string.iAmFeelingGoodInMiwok), getString(R.string.iAmFeelingGood), R.raw.phrase_im_feeling_good));
-        mWords.add(new Word(getString(R.string.areYouComingInMiwok), getString(R.string.areYouComing), R.raw.phrase_are_you_coming));
-        mWords.add(new Word(getString(R.string.yesIAmComingInMiwok), getString(R.string.yesIAmComing), R.raw.phrase_yes_im_coming));
-        mWords.add(new Word(getString(R.string.iAmComingInMiwok), getString(R.string.iAmComing), R.raw.phrase_im_coming));
-        mWords.add(new Word(getString(R.string.letsGoInMiwok), getString(R.string.letsGo), R.raw.phrase_lets_go));
-        mWords.add(new Word(getString(R.string.comeHereInMiwok), getString(R.string.comeHere), R.raw.phrase_come_here));
+        mWords.add(new Word(getString(R.string.where_are_you_going_in_miwok), getString(R.string.where_are_you_going), R.raw.phrase_where_are_you_going));
+        mWords.add(new Word(getString(R.string.what_is_your_name_in_miwok), getString(R.string.what_is_your_name), R.raw.phrase_what_is_your_name));
+        mWords.add(new Word(getString(R.string.my_name_is_in_miwok), getString(R.string.my_name_is), R.raw.phrase_my_name_is));
+        mWords.add(new Word(getString(R.string.how_are_you_feeling_in_miwok), getString(R.string.how_are_you_feeling), R.raw.phrase_how_are_you_feeling));
+        mWords.add(new Word(getString(R.string.i_am_feeling_good_in_miwok), getString(R.string.i_am_feeling_good), R.raw.phrase_im_feeling_good));
+        mWords.add(new Word(getString(R.string.are_you_coming_in_miwok), getString(R.string.are_you_coming), R.raw.phrase_are_you_coming));
+        mWords.add(new Word(getString(R.string.yes_i_am_coming_in_miwok), getString(R.string.yes_i_am_coming), R.raw.phrase_yes_im_coming));
+        mWords.add(new Word(getString(R.string.i_am_coming_in_miwok), getString(R.string.i_am_coming), R.raw.phrase_im_coming));
+        mWords.add(new Word(getString(R.string.lets_go_in_miwok), getString(R.string.lets_go), R.raw.phrase_lets_go));
+        mWords.add(new Word(getString(R.string.come_here_in_miwok), getString(R.string.come_here), R.raw.phrase_come_here));
 
-        WordAdapter adapter = new WordAdapter(this, mWords, R.color.category_phrases);
+        mAdapter = new WordAdapter(this, mWords, R.color.category_phrases);
 
-        mListView.setAdapter(adapter);
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setAdapter(mAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -78,7 +95,7 @@ public class PhrasesActivity extends AppCompatActivity {
                 //Release the media player if it currently exists because we are about to
                 //play a idfferent sound file
                 releaseMediaPlayer();
-                Word word = mWords.get(position);
+                mWord = mWords.get(position);
 
                 //Request audio focus for playback
                 int result = mAudioManager.requestAudioFocus(mOnAudioFocusChangeListener, AudioManager.STREAM_MUSIC,
@@ -89,7 +106,7 @@ public class PhrasesActivity extends AppCompatActivity {
                     //Release the media player if it currently exists because we are about to
                     //play a different sound file
 
-                    mMediaPlayer = MediaPlayer.create(getApplicationContext(), word.getmAudioResourceId());
+                    mMediaPlayer = MediaPlayer.create(getApplicationContext(), mWord.getmAudioResourceId());
                     mMediaPlayer.start();
 
                     //Setup a listener on the media player, so that we can stop and release the

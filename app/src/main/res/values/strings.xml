@@ -14,55 +14,55 @@
     <string name="category_numbers">Numbers</string>
 
     <!-- Category name for the vocabulary words for family members [CHAR LIMIT=20] -->
-    <string name="category_family">Family Members</string>
+    <string name="category_family">Family members</string>
 
     <!--English Number Names-->
-    <string name="numberOne">One</string>
-    <string name="numberTwo">Two</string>
-    <string name="numberThree">Three</string>
-    <string name="numberFour">Four</string>
-    <string name="numberFive">Five</string>
-    <string name="numberSix">Six</string>
-    <string name="numberSeven">Seven</string>
-    <string name="numberEight">Eight</string>
-    <string name="numberNine">Nine</string>
-    <string name="numberTen">Ten</string>
+    <string name="number_one">One</string>
+    <string name="number_two">Two</string>
+    <string name="number_three">Three</string>
+    <string name="number_four">Four</string>
+    <string name="number_five">Five</string>
+    <string name="number_six">Six</string>
+    <string name="number_seven">Seven</string>
+    <string name="number_eight">Eight</string>
+    <string name="number_nine">Nine</string>
+    <string name="number_ten">Ten</string>
 
     <!--Miwok Number Names-->
-    <string name="numberOneInMiwok" translatable="false">Lutti</string>
-    <string name="numberTwoInMiwok" translatable="false">Otiiko</string>
-    <string name="numberThreeInMiwok" translatable="false">Tolookosu</string>
-    <string name="numberFourInMiwok" translatable="false">Oyyisa</string>
-    <string name="numberFiveInMiwok" translatable="false">Massokka</string>
-    <string name="numberSixInMiwok" translatable="false">Temmokka</string>
-    <string name="numberSevenInMiwok" translatable="false">Kenekaku</string>
-    <string name="numberEightInMiwok" translatable="false">Kawinta</string>
-    <string name="numberNineInMiwok" translatable="false">Wo\'e</string>
-    <string name="numberTenInMiwok" translatable="false">Na\'aacha</string>
+    <string name="number_one_in_miwok" translatable="false">Lutti</string>
+    <string name="number_two_in_miwok" translatable="false">Otiiko</string>
+    <string name="number_three_in_miwok" translatable="false">Tolookosu</string>
+    <string name="number_four_in_miwok" translatable="false">Oyyisa</string>
+    <string name="number_five_in_miwok" translatable="false">Massokka</string>
+    <string name="number_six_in_miwok" translatable="false">Temmokka</string>
+    <string name="number_seven_in_miwok" translatable="false">Kenekaku</string>
+    <string name="number_eight_in_miwok" translatable="false">Kawinta</string>
+    <string name="number_nine_in_miwok" translatable="false">Wo\'e</string>
+    <string name="number_ten_in_miwok" translatable="false">Na\'aacha</string>
 
     <!--English Family Members Names-->
     <string name="father">Father</string>
     <string name="mother">Mother</string>
     <string name="son">Son</string>
     <string name="daughter">Daughter</string>
-    <string name="olderBrother">Older Brother</string>
-    <string name="youngerBrother">Younger Brother</string>
-    <string name="olderSister">Older Sister</string>
-    <string name="youngerSister">Younger Sister</string>
-    <string name="grandFather">GrandFather</string>
-    <string name="grandMother">GrandMother</string>
+    <string name="older_brother">Older Brother</string>
+    <string name="younger_brother">Younger Brother</string>
+    <string name="older_sister">Older Sister</string>
+    <string name="younger_sister">Younger Sister</string>
+    <string name="grand_father">GrandFather</string>
+    <string name="grand_mother">GrandMother</string>
 
     <!--Miwok Family Members Names-->
-    <string name="fatherInMiwok" translatable="false">әpә</string>
-    <string name="motherInMiwok" translatable="false">әṭa</string>
-    <string name="sonInMiwok" translatable="false">angsi</string>
-    <string name="daughterInMiwok" translatable="false">tune</string>
-    <string name="youngerBrotherInMiwok" translatable="false">chalitti</string>
-    <string name="youngerSisterInMiwok" translatable="false">kolliti</string>
-    <string name="olderBrotherInMiwok" translatable="false">taachi</string>
-    <string name="olderSisterInMiwok" translatable="false">teṭe</string>
-    <string name="grandFatherInMiwok" translatable="false">paapa</string>
-    <string name="grandMotherInMiwok" translatable="false">ama</string>
+    <string name="father_in_miwok" translatable="false">әpә</string>
+    <string name="mother_in_miwok" translatable="false">әṭa</string>
+    <string name="son_in_miwok" translatable="false">angsi</string>
+    <string name="daughter_in_miwok" translatable="false">tune</string>
+    <string name="younger_brother_in_miwok" translatable="false">chalitti</string>
+    <string name="younger_sister_in_miwok" translatable="false">kolliti</string>
+    <string name="older_brother_in_miwok" translatable="false">taachi</string>
+    <string name="older_sister_in_miwok" translatable="false">teṭe</string>
+    <string name="grand_father_in_miwok" translatable="false">paapa</string>
+    <string name="grand_mother_in_miwok" translatable="false">ama</string>
 
     <!--English Colors Names-->
     <string name="red">Red</string>
@@ -71,41 +71,41 @@
     <string name="gray">Gray</string>
     <string name="black">Black</string>
     <string name="white">White</string>
-    <string name="dustyYellow">Dusty Yellow</string>
-    <string name="mustardYellow">Mustard Yellow</string>
+    <string name="dusty_yellow">Dusty Yellow</string>
+    <string name="mustard_yellow">Mustard Yellow</string>
 
     <!--Miwok Colors Names-->
-    <string name="redInMiwok" translatable="false">weṭeṭṭi</string>
-    <string name="greenInMiwok" translatable="false">chokokki</string>
-    <string name="brownInMiwok" translatable="false">ṭakaakki</string>
-    <string name="grayInMiwok" translatable="false">ṭopoppi</string>
-    <string name="blackInMiwok" translatable="false">kululli</string>
-    <string name="whiteInMiwok" translatable="false">kelelli</string>
-    <string name="dustyYellowInMiwok" translatable="false">ṭopiisә</string>
-    <string name="mustardYellowInMiwok" translatable="false">chiwiiṭә</string>
+    <string name="red_in_miwok" translatable="false">weṭeṭṭi</string>
+    <string name="green_in_miwok" translatable="false">chokokki</string>
+    <string name="brown_in_miwok" translatable="false">ṭakaakki</string>
+    <string name="gray_in_miwok" translatable="false">ṭopoppi</string>
+    <string name="black_in_miwok" translatable="false">kululli</string>
+    <string name="white_in_miwok" translatable="false">kelelli</string>
+    <string name="dusty_yellow_in_miwok" translatable="false">ṭopiisә</string>
+    <string name="mustard_yellow_in_miwok" translatable="false">chiwiiṭә</string>
 
     <!--English Phrases-->
-    <string name="whereAreYouGoing">Where are you going?</string>
-    <string name="whatIsYourName">What is your name?</string>
-    <string name="myNameIs">My name is</string>
-    <string name="howAreYouFeeling">How are you feeling?</string>
-    <string name="iAmFeelingGood">I’m feeling good</string>
-    <string name="areYouComing">Are you coming?</string>
-    <string name="yesIAmComing">Yes, I’m coming</string>
-    <string name="iAmComing">I’m coming</string>
-    <string name="letsGo">Let’s go</string>
-    <string name="comeHere">Come here</string>
+    <string name="where_are_you_going">Where are you going?</string>
+    <string name="what_is_your_name">What is your name?</string>
+    <string name="my_name_is">My name is</string>
+    <string name="how_are_you_feeling">How are you feeling?</string>
+    <string name="i_am_feeling_good">I’m feeling good</string>
+    <string name="are_you_coming">Are you coming?</string>
+    <string name="yes_i_am_coming">Yes, I’m coming</string>
+    <string name="i_am_coming">I’m coming</string>
+    <string name="lets_go">Let’s go</string>
+    <string name="come_here">Come here</string>
 
     <!--Miwok Phrases-->
-    <string name="whereAreYouGoingInMiwok" translatable="false">minto wuksus</string>
-    <string name="whatIsYourNameInMiwok" translatable="false">tinnә oyaase\'nә</string>
-    <string name="myNameIsInMiwok" translatable="false">oyaaset</string>
-    <string name="howAreYouFeelingInMiwok" translatable="false">michәksәs?</string>
-    <string name="iAmFeelingGoodInMiwok" translatable="false">kuchi achit</string>
-    <string name="areYouComingInMiwok" translatable="false">әәnәs\'aa?</string>
-    <string name="yesIAmComingInMiwok" translatable="false">hәә\’ әәnәm</string>
-    <string name="iAmComingInMiwok" translatable="false">әәnәm</string>
-    <string name="letsGoInMiwok" translatable="false">yoowutis</string>
-    <string name="comeHereInMiwok" translatable="false">әnni\'nem</string>
+    <string name="where_are_you_going_in_miwok" translatable="false">minto wuksus</string>
+    <string name="what_is_your_name_in_miwok" translatable="false">tinnә oyaase\'nә</string>
+    <string name="my_name_is_in_miwok" translatable="false">oyaaset</string>
+    <string name="how_are_you_feeling_in_miwok" translatable="false">michәksәs?</string>
+    <string name="i_am_feeling_good_in_miwok" translatable="false">kuchi achit</string>
+    <string name="are_you_coming_in_miwok" translatable="false">әәnәs\'aa?</string>
+    <string name="yes_i_am_coming_in_miwok" translatable="false">hәә\’ әәnәm</string>
+    <string name="i_am_coming_in_miwok" translatable="false">әәnәm</string>
+    <string name="lets_go_in_miwok" translatable="false">yoowutis</string>
+    <string name="come_here_in_miwok" translatable="false">әnni\'nem</string>
 
 </resources>

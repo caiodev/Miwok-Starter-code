@@ -22,34 +22,43 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class MainActivity extends AppCompatActivity {
 
-    private TextView numbers;
-    private TextView family;
-    private TextView colors;
-    private TextView phrases;
+    @BindView(R.id.numbers)
+    protected TextView numbers;
+
+    @BindView(R.id.family)
+    protected TextView family;
+
+    @BindView(R.id.colors)
+    protected TextView colors;
+
+    @BindView(R.id.phrases)
+    protected TextView phrases;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        populateView(numbers, R.id.numbers, NumbersActivity.class);
-        populateView(family, R.id.family, FamilyActivity.class);
-        populateView(colors, R.id.colors, ColorsActivity.class);
-        populateView(phrases, R.id.phrases, PhrasesActivity.class);
+        ButterKnife.bind(this);
+
+        populateView(numbers, NumbersActivity.class);
+        populateView(family, FamilyActivity.class);
+        populateView(colors, ColorsActivity.class);
+        populateView(phrases, PhrasesActivity.class);
     }
 
-    void populateView(TextView textView, int viewId, final Class<? extends Activity> ActivityToOpen){
+    void populateView(TextView textView, final Class<? extends Activity> ActivityToOpen) {
 
-        textView = (TextView) findViewById(viewId);
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Create a new intent to open the current activity
-                Intent intent = new Intent(getApplicationContext(), ActivityToOpen);
                 // Start the new activity
-                startActivity(intent);
+                startActivity(new Intent(getApplicationContext(), ActivityToOpen));
             }
         });
     }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/listItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -9,7 +10,8 @@
     <ImageView
         android:id="@+id/icon"
         android:layout_width="@dimen/list_item_width"
-        android:layout_height="@dimen/list_item_height" />
+        android:layout_height="@dimen/list_item_height"
+        tools:ignore="ContentDescription" />
 
     <RelativeLayout
         android:id="@+id/text_and_image_container"
@@ -44,7 +46,8 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@mipmap/ic_play_arrow" />
+            android:src="@mipmap/play_arrow"
+            tools:ignore="ContentDescription" />
 
     </RelativeLayout>
 

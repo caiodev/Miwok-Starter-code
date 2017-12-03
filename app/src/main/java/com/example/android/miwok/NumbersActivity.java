@@ -11,73 +11,90 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class NumbersActivity extends AppCompatActivity {
 
+    //Views
+    @BindView(R.id.word_list)
+    protected ListView listView;
+
+    //Attributes
     private ArrayList<Word> mWords;
-    private ListView mListView;
     private WordAdapter mAdapter;
     private MediaPlayer mMediaPlayer;
     private AudioManager mAudioManager;
-    AudioManager.OnAudioFocusChangeListener mOnAudioFocusChangeListener = new AudioManager.OnAudioFocusChangeListener() {
-        @Override
-        public void onAudioFocusChange(int focusChange) {
-
-            if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT ||
-                    focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
-                // Pause playback
-                mMediaPlayer.pause();
-                mMediaPlayer.seekTo(0);
-
-            } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
-                // Resume playback
-                mMediaPlayer.start();
-
-            } else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
-                // Stop playback
-                releaseMediaPlayer();
-            }
-        }
-    };
-    private MediaPlayer.OnCompletionListener mCompletionListener = new MediaPlayer.OnCompletionListener() {
-        @Override
-        public void onCompletion(MediaPlayer mp) {
-            releaseMediaPlayer();
-        }
-    };
+    private AudioManager.OnAudioFocusChangeListener mOnAudioFocusChangeListener;
+    private MediaPlayer.OnCompletionListener mCompletionListener;
+    private Word mWord;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.word_list);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+
+        ButterKnife.bind(this);
+
         setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
         // Create and setup the (@link AudioManager) to request audio focus
         mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         mWords = new ArrayList<>();
-        mListView = (ListView) findViewById(R.id.wordList);
 
-        mWords.add(new Word(getString(R.string.numberOneInMiwok), getString(R.string.numberOne), R.mipmap.number_one, R.raw.number_one));
-        mWords.add(new Word(getString(R.string.numberTwoInMiwok), getString(R.string.numberTwo), R.mipmap.number_two, R.raw.number_two));
-        mWords.add(new Word(getString(R.string.numberThreeInMiwok), getString(R.string.numberThree), R.mipmap.number_three, R.raw.number_three));
-        mWords.add(new Word(getString(R.string.numberFourInMiwok), getString(R.string.numberFour), R.mipmap.number_four, R.raw.number_four));
-        mWords.add(new Word(getString(R.string.numberFiveInMiwok), getString(R.string.numberFive), R.mipmap.number_five, R.raw.number_five));
-        mWords.add(new Word(getString(R.string.numberSixInMiwok), getString(R.string.numberSix), R.mipmap.number_six, R.raw.number_six));
-        mWords.add(new Word(getString(R.string.numberSevenInMiwok), getString(R.string.numberSeven), R.mipmap.number_seven, R.raw.number_seven));
-        mWords.add(new Word(getString(R.string.numberEightInMiwok), getString(R.string.numberEight), R.mipmap.number_eight, R.raw.number_eight));
-        mWords.add(new Word(getString(R.string.numberNineInMiwok), getString(R.string.numberNine), R.mipmap.number_nine, R.raw.number_nine));
-        mWords.add(new Word(getString(R.string.numberTenInMiwok), getString(R.string.numberTen), R.mipmap.number_ten, R.raw.number_ten));
+        mOnAudioFocusChangeListener = new AudioManager.OnAudioFocusChangeListener() {
+            @Override
+            public void onAudioFocusChange(int focusChange) {
+
+                if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT ||
+                        focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
+                    // Pause playback
+                    mMediaPlayer.pause();
+                    mMediaPlayer.seekTo(0);
+
+                } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
+                    // Resume playback
+                    mMediaPlayer.start();
+
+                } else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
+                    // Stop playback
+                    releaseMediaPlayer();
+                }
+            }
+        };
+
+        mCompletionListener = new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                releaseMediaPlayer();
+            }
+        };
+
+        mWords.add(new Word(getString(R.string.number_one_in_miwok), getString(R.string.number_one), R.mipmap.number_one, R.raw.number_one));
+        mWords.add(new Word(getString(R.string.number_two_in_miwok), getString(R.string.number_two), R.mipmap.number_two, R.raw.number_two));
+        mWords.add(new Word(getString(R.string.number_three_in_miwok), getString(R.string.number_three), R.mipmap.number_three, R.raw.number_three));
+        mWords.add(new Word(getString(R.string.number_four_in_miwok), getString(R.string.number_four), R.mipmap.number_four, R.raw.number_four));
+        mWords.add(new Word(getString(R.string.number_five_in_miwok), getString(R.string.number_five), R.mipmap.number_five, R.raw.number_five));
+        mWords.add(new Word(getString(R.string.number_six_in_miwok), getString(R.string.number_six), R.mipmap.number_six, R.raw.number_six));
+        mWords.add(new Word(getString(R.string.number_seven_in_miwok), getString(R.string.number_seven), R.mipmap.number_seven, R.raw.number_seven));
+        mWords.add(new Word(getString(R.string.number_eight_in_miwok), getString(R.string.number_eight), R.mipmap.number_eight, R.raw.number_eight));
+        mWords.add(new Word(getString(R.string.number_nine_in_miwok), getString(R.string.number_nine), R.mipmap.number_nine, R.raw.number_nine));
+        mWords.add(new Word(getString(R.string.number_ten_in_miwok), getString(R.string.number_ten), R.mipmap.number_ten, R.raw.number_ten));
 
         mAdapter = new WordAdapter(this, mWords, R.color.category_numbers);
 
-        mListView.setAdapter(mAdapter);
-        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setAdapter(mAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 releaseMediaPlayer();
-                Word word = mWords.get(position);
+                mWord = mWords.get(position);
 
                 //Request audio focus for playback
                 int result = mAudioManager.requestAudioFocus(mOnAudioFocusChangeListener, AudioManager.STREAM_MUSIC,
@@ -88,7 +105,7 @@ public class NumbersActivity extends AppCompatActivity {
                     //Release the media player if it currently exists because we are about to
                     //play a different sound file
 
-                    mMediaPlayer = MediaPlayer.create(getApplicationContext(), word.getmAudioResourceId());
+                    mMediaPlayer = MediaPlayer.create(getApplicationContext(), mWord.getmAudioResourceId());
                     mMediaPlayer.start();
 
                     //Setup a listener on the media player, so that we can stop and release the
