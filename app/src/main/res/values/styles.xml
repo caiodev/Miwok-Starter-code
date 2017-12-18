@@ -1,4 +1,3 @@
-
 <resources>
 
     <!-- Base application theme. -->
@@ -6,6 +5,8 @@
         <item name="colorPrimary">@color/primary_color</item>
         <item name="colorPrimaryDark">@color/primary_dark_color</item>
         <item name="colorAccent">#000000</item>
+        <item name="actionBarStyle">@style/MiwokAppBarStyle</item>
+        <item name="android:windowContentOverlay">@null</item>
     </style>
 
     <!-- Style for a category of vocabulary words -->
@@ -26,6 +27,24 @@
         <item name="android:layout_weight">1</item>
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">@android:color/white</item>
+    </style>
+
+    <style name="MyCustomTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">@color/white</item>
+        <item name="tabBackground">@color/primary_color</item>
+        <item name="tabSelectedTextColor">@android:color/white</item>
+        <item name="tabTextAppearance">@style/CategoryTabTextAppearance</item>
+    </style>
+
+    <!-- Estilo da barra do aplicativo -->
+    <style name="MiwokAppBarStyle" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+        <!-- Remove a sombra abaixo da barra do aplicativo -->
+        <item name="elevation">0dp</item>
+    </style>
+
+    <!-- Aparência do estilo do texto para uma categoria de aba -->
+    <style name="CategoryTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textColor">#A8A19E</item>
     </style>
 
 </resources>

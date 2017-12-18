@@ -4,8 +4,11 @@ import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
@@ -13,31 +16,43 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
-public class FamilyActivity extends AppCompatActivity {
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class ColorsFragment extends Fragment {
 
+    //Views
     @BindView(R.id.word_list)
     protected ListView listView;
 
+    //Attributes
     private ArrayList<Word> mWords;
     private MediaPlayer mMediaPlayer;
     private AudioManager mAudioManager;
     private AudioManager.OnAudioFocusChangeListener mOnAudioFocusChangeListener;
     private MediaPlayer.OnCompletionListener mCompletionListener;
+    private Word mWord;
     private WordAdapter mAdapter;
+    private Unbinder mUnbinder;
+
+    public ColorsFragment() {
+        // Required empty public constructor
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.word_list);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
+        // Inflate the layout for this fragment
+        View parentView = inflater.inflate(R.layout.word_list, container, false);
 
-        ButterKnife.bind(this);
+        ButterKnife.bind(this, parentView);
+        getActivity().setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
-        setVolumeControlStream(AudioManager.STREAM_MUSIC);
+        // Create and setup the (@link AudioManager) to request audio focus
+        mAudioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
 
         mOnAudioFocusChangeListener = new AudioManager.OnAudioFocusChangeListener() {
             @Override
@@ -59,6 +74,7 @@ public class FamilyActivity extends AppCompatActivity {
                 }
             }
         };
+
         mCompletionListener = new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
@@ -66,22 +82,18 @@ public class FamilyActivity extends AppCompatActivity {
             }
         };
 
-        // Create and setup the (@link AudioManager) to request audio focus
-        mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         mWords = new ArrayList<>();
 
-        mWords.add(new Word(getString(R.string.father_in_miwok), getString(R.string.father), R.mipmap.family_father, R.raw.family_father));
-        mWords.add(new Word(getString(R.string.mother_in_miwok), getString(R.string.mother), R.mipmap.family_mother, R.raw.family_mother));
-        mWords.add(new Word(getString(R.string.son_in_miwok), getString(R.string.son), R.mipmap.family_son, R.raw.family_son));
-        mWords.add(new Word(getString(R.string.daughter_in_miwok), getString(R.string.daughter), R.mipmap.family_daughter, R.raw.family_daughter));
-        mWords.add(new Word(getString(R.string.younger_brother_in_miwok), getString(R.string.younger_brother), R.mipmap.family_younger_brother, R.raw.family_younger_brother));
-        mWords.add(new Word(getString(R.string.younger_sister_in_miwok), getString(R.string.younger_sister), R.mipmap.family_younger_sister, R.raw.family_younger_sister));
-        mWords.add(new Word(getString(R.string.older_brother_in_miwok), getString(R.string.older_brother), R.mipmap.family_older_brother, R.raw.family_older_brother));
-        mWords.add(new Word(getString(R.string.older_sister_in_miwok), getString(R.string.older_sister), R.mipmap.family_older_sister, R.raw.family_older_sister));
-        mWords.add(new Word(getString(R.string.grand_father_in_miwok), getString(R.string.grand_father), R.mipmap.family_grandfather, R.raw.family_grandfather));
-        mWords.add(new Word(getString(R.string.grand_mother_in_miwok), getString(R.string.grand_mother), R.mipmap.family_grandmother, R.raw.family_grandmother));
+        mWords.add(new Word(getString(R.string.red_in_miwok), getString(R.string.red), R.mipmap.color_red, R.raw.color_red));
+        mWords.add(new Word(getString(R.string.green_in_miwok), getString(R.string.green), R.mipmap.color_green, R.raw.color_green));
+        mWords.add(new Word(getString(R.string.brown_in_miwok), getString(R.string.brown), R.mipmap.color_brown, R.raw.color_brown));
+        mWords.add(new Word(getString(R.string.gray_in_miwok), getString(R.string.gray), R.mipmap.color_gray, R.raw.color_gray));
+        mWords.add(new Word(getString(R.string.black_in_miwok), getString(R.string.black), R.mipmap.color_black, R.raw.color_black));
+        mWords.add(new Word(getString(R.string.white_in_miwok), getString(R.string.white), R.mipmap.color_white, R.raw.color_white));
+        mWords.add(new Word(getString(R.string.dusty_yellow_in_miwok), getString(R.string.dusty_yellow), R.mipmap.color_dusty_yellow, R.raw.color_dusty_yellow));
+        mWords.add(new Word(getString(R.string.mustard_yellow_in_miwok), getString(R.string.mustard_yellow), R.mipmap.color_mustard_yellow, R.raw.color_mustard_yellow));
 
-        mAdapter = new WordAdapter(this, mWords, R.color.category_family);
+        mAdapter = new WordAdapter(getActivity(), mWords, R.color.category_colors);
 
         listView.setAdapter(mAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -92,7 +104,8 @@ public class FamilyActivity extends AppCompatActivity {
                 //Release the media player if it currently exists because we are about to
                 //play a different sound file
                 releaseMediaPlayer();
-                Word word = mWords.get(position);
+
+                mWord = mWords.get(position);
 
                 //Request audio focus for playback
                 int result = mAudioManager.requestAudioFocus(mOnAudioFocusChangeListener, AudioManager.STREAM_MUSIC,
@@ -102,8 +115,7 @@ public class FamilyActivity extends AppCompatActivity {
 
                     //Release the media player if it currently exists because we are about to
                     //play a different sound file
-
-                    mMediaPlayer = MediaPlayer.create(getApplicationContext(), word.getmAudioResourceId());
+                    mMediaPlayer = MediaPlayer.create(getActivity(), mWord.getmAudioResourceId());
                     mMediaPlayer.start();
 
                     //Setup a listener on the media player, so that we can stop and release the
@@ -112,12 +124,8 @@ public class FamilyActivity extends AppCompatActivity {
                 }
             }
         });
-    }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        releaseMediaPlayer();
+        return parentView;
     }
 
     /**
@@ -140,8 +148,17 @@ public class FamilyActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onSupportNavigateUp() {
-        finish();
-        return true;
+    public void onStop() {
+        super.onStop();
+        releaseMediaPlayer();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mUnbinder != null) {
+            mUnbinder.unbind();
+            mUnbinder = null;
+        }
     }
 }

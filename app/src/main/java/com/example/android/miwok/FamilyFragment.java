@@ -4,8 +4,11 @@ import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
@@ -13,38 +16,41 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
-public class NumbersActivity extends AppCompatActivity {
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class FamilyFragment extends Fragment {
 
-    //Views
     @BindView(R.id.word_list)
     protected ListView listView;
 
-    //Attributes
     private ArrayList<Word> mWords;
-    private WordAdapter mAdapter;
     private MediaPlayer mMediaPlayer;
     private AudioManager mAudioManager;
     private AudioManager.OnAudioFocusChangeListener mOnAudioFocusChangeListener;
     private MediaPlayer.OnCompletionListener mCompletionListener;
-    private Word mWord;
+    private WordAdapter mAdapter;
+    private Unbinder mUnbinder;
+
+    public FamilyFragment() {
+        // Required empty public constructor
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.word_list);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
+        // Inflate the layout for this fragment
+        View parentView = inflater.inflate(R.layout.word_list, container, false);
 
-        ButterKnife.bind(this);
+        ButterKnife.bind(this, parentView);
 
-        setVolumeControlStream(AudioManager.STREAM_MUSIC);
+        getActivity().setVolumeControlStream(AudioManager.STREAM_MUSIC);
 
         // Create and setup the (@link AudioManager) to request audio focus
-        mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-        mWords = new ArrayList<>();
+        mAudioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
 
         mOnAudioFocusChangeListener = new AudioManager.OnAudioFocusChangeListener() {
             @Override
@@ -66,7 +72,6 @@ public class NumbersActivity extends AppCompatActivity {
                 }
             }
         };
-
         mCompletionListener = new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
@@ -74,18 +79,20 @@ public class NumbersActivity extends AppCompatActivity {
             }
         };
 
-        mWords.add(new Word(getString(R.string.number_one_in_miwok), getString(R.string.number_one), R.mipmap.number_one, R.raw.number_one));
-        mWords.add(new Word(getString(R.string.number_two_in_miwok), getString(R.string.number_two), R.mipmap.number_two, R.raw.number_two));
-        mWords.add(new Word(getString(R.string.number_three_in_miwok), getString(R.string.number_three), R.mipmap.number_three, R.raw.number_three));
-        mWords.add(new Word(getString(R.string.number_four_in_miwok), getString(R.string.number_four), R.mipmap.number_four, R.raw.number_four));
-        mWords.add(new Word(getString(R.string.number_five_in_miwok), getString(R.string.number_five), R.mipmap.number_five, R.raw.number_five));
-        mWords.add(new Word(getString(R.string.number_six_in_miwok), getString(R.string.number_six), R.mipmap.number_six, R.raw.number_six));
-        mWords.add(new Word(getString(R.string.number_seven_in_miwok), getString(R.string.number_seven), R.mipmap.number_seven, R.raw.number_seven));
-        mWords.add(new Word(getString(R.string.number_eight_in_miwok), getString(R.string.number_eight), R.mipmap.number_eight, R.raw.number_eight));
-        mWords.add(new Word(getString(R.string.number_nine_in_miwok), getString(R.string.number_nine), R.mipmap.number_nine, R.raw.number_nine));
-        mWords.add(new Word(getString(R.string.number_ten_in_miwok), getString(R.string.number_ten), R.mipmap.number_ten, R.raw.number_ten));
+        mWords = new ArrayList<>();
 
-        mAdapter = new WordAdapter(this, mWords, R.color.category_numbers);
+        mWords.add(new Word(getString(R.string.father_in_miwok), getString(R.string.father), R.mipmap.family_father, R.raw.family_father));
+        mWords.add(new Word(getString(R.string.mother_in_miwok), getString(R.string.mother), R.mipmap.family_mother, R.raw.family_mother));
+        mWords.add(new Word(getString(R.string.son_in_miwok), getString(R.string.son), R.mipmap.family_son, R.raw.family_son));
+        mWords.add(new Word(getString(R.string.daughter_in_miwok), getString(R.string.daughter), R.mipmap.family_daughter, R.raw.family_daughter));
+        mWords.add(new Word(getString(R.string.younger_brother_in_miwok), getString(R.string.younger_brother), R.mipmap.family_younger_brother, R.raw.family_younger_brother));
+        mWords.add(new Word(getString(R.string.younger_sister_in_miwok), getString(R.string.younger_sister), R.mipmap.family_younger_sister, R.raw.family_younger_sister));
+        mWords.add(new Word(getString(R.string.older_brother_in_miwok), getString(R.string.older_brother), R.mipmap.family_older_brother, R.raw.family_older_brother));
+        mWords.add(new Word(getString(R.string.older_sister_in_miwok), getString(R.string.older_sister), R.mipmap.family_older_sister, R.raw.family_older_sister));
+        mWords.add(new Word(getString(R.string.grand_father_in_miwok), getString(R.string.grand_father), R.mipmap.family_grandfather, R.raw.family_grandfather));
+        mWords.add(new Word(getString(R.string.grand_mother_in_miwok), getString(R.string.grand_mother), R.mipmap.family_grandmother, R.raw.family_grandmother));
+
+        mAdapter = new WordAdapter(getActivity(), mWords, R.color.category_family);
 
         listView.setAdapter(mAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -93,8 +100,10 @@ public class NumbersActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
+                //Release the media player if it currently exists because we are about to
+                //play a different sound file
                 releaseMediaPlayer();
-                mWord = mWords.get(position);
+                Word word = mWords.get(position);
 
                 //Request audio focus for playback
                 int result = mAudioManager.requestAudioFocus(mOnAudioFocusChangeListener, AudioManager.STREAM_MUSIC,
@@ -105,7 +114,7 @@ public class NumbersActivity extends AppCompatActivity {
                     //Release the media player if it currently exists because we are about to
                     //play a different sound file
 
-                    mMediaPlayer = MediaPlayer.create(getApplicationContext(), mWord.getmAudioResourceId());
+                    mMediaPlayer = MediaPlayer.create(getActivity(), word.getmAudioResourceId());
                     mMediaPlayer.start();
 
                     //Setup a listener on the media player, so that we can stop and release the
@@ -114,12 +123,8 @@ public class NumbersActivity extends AppCompatActivity {
                 }
             }
         });
-    }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        releaseMediaPlayer();
+        return parentView;
     }
 
     /**
@@ -142,8 +147,17 @@ public class NumbersActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onSupportNavigateUp() {
-        finish();
-        return true;
+    public void onStop() {
+        super.onStop();
+        releaseMediaPlayer();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mUnbinder != null) {
+            mUnbinder.unbind();
+            mUnbinder = null;
+        }
     }
 }

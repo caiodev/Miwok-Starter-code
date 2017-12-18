@@ -4,8 +4,11 @@ import android.content.Context;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
@@ -13,8 +16,12 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 
-public class PhrasesActivity extends AppCompatActivity {
+/**
+ * A simple {@link Fragment} subclass.
+ */
+public class PhrasesFragment extends Fragment {
 
     //Views
     @BindView(R.id.word_list)
@@ -28,18 +35,24 @@ public class PhrasesActivity extends AppCompatActivity {
     private MediaPlayer.OnCompletionListener mCompletionListener;
     private WordAdapter mAdapter;
     private Word mWord;
+    private Unbinder mUnbinder;
+
+    public PhrasesFragment() {
+        // Required empty public constructor
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.word_list);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
+        // Inflate the layout for this fragment
+        View parentView = inflater.inflate(R.layout.word_list, container, false);
 
-        ButterKnife.bind(this);
-        setVolumeControlStream(AudioManager.STREAM_MUSIC);
+        ButterKnife.bind(this, parentView);
+        getActivity().setVolumeControlStream(AudioManager.STREAM_MUSIC);
+
+        // Create and setup the (@link AudioManager) to request audio focus
+        mAudioManager = (AudioManager) getActivity().getSystemService(Context.AUDIO_SERVICE);
 
         mOnAudioFocusChangeListener = new AudioManager.OnAudioFocusChangeListener() {
             @Override
@@ -69,8 +82,6 @@ public class PhrasesActivity extends AppCompatActivity {
             }
         };
 
-        // Create and setup the (@link AudioManager) to request audio focus
-        mAudioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
         mWords = new ArrayList<>();
 
         mWords.add(new Word(getString(R.string.where_are_you_going_in_miwok), getString(R.string.where_are_you_going), R.raw.phrase_where_are_you_going));
@@ -84,7 +95,7 @@ public class PhrasesActivity extends AppCompatActivity {
         mWords.add(new Word(getString(R.string.lets_go_in_miwok), getString(R.string.lets_go), R.raw.phrase_lets_go));
         mWords.add(new Word(getString(R.string.come_here_in_miwok), getString(R.string.come_here), R.raw.phrase_come_here));
 
-        mAdapter = new WordAdapter(this, mWords, R.color.category_phrases);
+        mAdapter = new WordAdapter(getActivity(), mWords, R.color.category_phrases);
 
         listView.setAdapter(mAdapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -106,7 +117,7 @@ public class PhrasesActivity extends AppCompatActivity {
                     //Release the media player if it currently exists because we are about to
                     //play a different sound file
 
-                    mMediaPlayer = MediaPlayer.create(getApplicationContext(), mWord.getmAudioResourceId());
+                    mMediaPlayer = MediaPlayer.create(getActivity(), mWord.getmAudioResourceId());
                     mMediaPlayer.start();
 
                     //Setup a listener on the media player, so that we can stop and release the
@@ -115,12 +126,8 @@ public class PhrasesActivity extends AppCompatActivity {
                 }
             }
         });
-    }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        releaseMediaPlayer();
+        return parentView;
     }
 
     /**
@@ -143,8 +150,17 @@ public class PhrasesActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onSupportNavigateUp() {
-        finish();
-        return true;
+    public void onStop() {
+        super.onStop();
+        releaseMediaPlayer();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (mUnbinder != null) {
+            mUnbinder.unbind();
+            mUnbinder = null;
+        }
     }
 }

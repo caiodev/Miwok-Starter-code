@@ -1,20 +1,12 @@
-
 <resources>
 
     <!-- Title for the application. [CHAR LIMIT=12] -->
     <string name="app_name" translatable="false">Miwok</string>
 
-    <!-- Category name for phrases [CHAR LIMIT=20] -->
-    <string name="category_phrases">Phrases</string>
-
-    <!-- Category name for the vocabulary words for colors [CHAR LIMIT=20] -->
-    <string name="category_colors">Colors</string>
-
-    <!-- Category name for the vocabulary words for numbers [CHAR LIMIT=20] -->
     <string name="category_numbers">Numbers</string>
-
-    <!-- Category name for the vocabulary words for family members [CHAR LIMIT=20] -->
     <string name="category_family">Family members</string>
+    <string name="category_colors">Colors</string>
+    <string name="category_phrases">Phrases</string>
 
     <!--English Number Names-->
     <string name="number_one">One</string>
@@ -54,13 +46,13 @@
 
     <!--Miwok Family Members Names-->
     <string name="father_in_miwok" translatable="false">әpә</string>
-    <string name="mother_in_miwok" translatable="false">әṭa</string>
+    <string name="mother_in_miwok" translatable="false">әta</string>
     <string name="son_in_miwok" translatable="false">angsi</string>
     <string name="daughter_in_miwok" translatable="false">tune</string>
     <string name="younger_brother_in_miwok" translatable="false">chalitti</string>
     <string name="younger_sister_in_miwok" translatable="false">kolliti</string>
     <string name="older_brother_in_miwok" translatable="false">taachi</string>
-    <string name="older_sister_in_miwok" translatable="false">teṭe</string>
+    <string name="older_sister_in_miwok" translatable="false">tete</string>
     <string name="grand_father_in_miwok" translatable="false">paapa</string>
     <string name="grand_mother_in_miwok" translatable="false">ama</string>
 
@@ -75,14 +67,14 @@
     <string name="mustard_yellow">Mustard Yellow</string>
 
     <!--Miwok Colors Names-->
-    <string name="red_in_miwok" translatable="false">weṭeṭṭi</string>
+    <string name="red_in_miwok" translatable="false">wetetti</string>
     <string name="green_in_miwok" translatable="false">chokokki</string>
-    <string name="brown_in_miwok" translatable="false">ṭakaakki</string>
-    <string name="gray_in_miwok" translatable="false">ṭopoppi</string>
+    <string name="brown_in_miwok" translatable="false">takaakki</string>
+    <string name="gray_in_miwok" translatable="false">topoppi</string>
     <string name="black_in_miwok" translatable="false">kululli</string>
     <string name="white_in_miwok" translatable="false">kelelli</string>
-    <string name="dusty_yellow_in_miwok" translatable="false">ṭopiisә</string>
-    <string name="mustard_yellow_in_miwok" translatable="false">chiwiiṭә</string>
+    <string name="dusty_yellow_in_miwok" translatable="false">topiisә</string>
+    <string name="mustard_yellow_in_miwok" translatable="false">chiwiitә</string>
 
     <!--English Phrases-->
     <string name="where_are_you_going">Where are you going?</string>
@@ -107,5 +99,8 @@
     <string name="i_am_coming_in_miwok" translatable="false">әәnәm</string>
     <string name="lets_go_in_miwok" translatable="false">yoowutis</string>
     <string name="come_here_in_miwok" translatable="false">әnni\'nem</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

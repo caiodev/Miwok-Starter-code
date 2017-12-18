@@ -1,43 +1,24 @@
-/*
- * Copyright (C) 2016 The Android Open Source Project
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 package com.example.android.miwok;
 
-import android.app.Activity;
-import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
-    @BindView(R.id.numbers)
-    protected TextView numbers;
+    @BindView(R.id.view_pager)
+    protected ViewPager viewPager;
 
-    @BindView(R.id.family)
-    protected TextView family;
+    @BindView(R.id.sliding_tabs)
+    protected TabLayout tabLayout;
 
-    @BindView(R.id.colors)
-    protected TextView colors;
-
-    @BindView(R.id.phrases)
-    protected TextView phrases;
+    private SimpleFragmentPagerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,20 +27,22 @@ public class MainActivity extends AppCompatActivity {
 
         ButterKnife.bind(this);
 
-        populateView(numbers, NumbersActivity.class);
-        populateView(family, FamilyActivity.class);
-        populateView(colors, ColorsActivity.class);
-        populateView(phrases, PhrasesActivity.class);
+        adapter = new SimpleFragmentPagerAdapter(getSupportFragmentManager(), getApplicationContext());
+
+        // Set the adapter onto the view pager
+        viewPager.setAdapter(adapter);
+
+        tabLayout.setupWithViewPager(viewPager);
     }
 
-    void populateView(TextView textView, final Class<? extends Activity> ActivityToOpen) {
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
 
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Start the new activity
-                startActivity(new Intent(getApplicationContext(), ActivityToOpen));
-            }
-        });
+        if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            Toast.makeText(this, "landscape", Toast.LENGTH_SHORT).show();
+        } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
+            Toast.makeText(this, "portrait", Toast.LENGTH_SHORT).show();
+        }
     }
 }
