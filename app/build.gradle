@@ -1,8 +1,10 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 27
-    buildToolsVersion '27.0.1'
+    buildToolsVersion '27.0.2'
 
     defaultConfig {
         applicationId "com.example.android.miwok"
@@ -21,11 +23,9 @@ android {
 
 ext {
     supportLibraryVersion = '27.0.2'
-    butterKnifeVersion = '8.8.1'
     junitVersion = '4.12'
     constrainLayoutVersion = '1.0.2'
 }
-
 
 dependencies {
     implementation 'com.android.support:support-v4:27.0.2'
@@ -34,6 +34,9 @@ dependencies {
     compile "com.android.support:appcompat-v7:$supportLibraryVersion"
     compile "com.android.support:support-v4:$supportLibraryVersion"
     compile "com.android.support:design:$supportLibraryVersion"
-    compile "com.jakewharton:butterknife:$butterKnifeVersion"
-    annotationProcessor "com.jakewharton:butterknife-compiler:$butterKnifeVersion"
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+}
+
+repositories {
+    mavenCentral()
 }

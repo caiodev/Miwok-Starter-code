@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/listItem"
+    android:id="@+id/listViewLinearLayoutComponent"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minHeight="@dimen/list_item_height"
     android:orientation="horizontal">
 
     <ImageView
-        android:id="@+id/icon"
+        android:id="@+id/listViewImageViewAvatar"
         android:layout_width="@dimen/list_item_width"
         android:layout_height="@dimen/list_item_height"
         tools:ignore="ContentDescription" />
 
     <RelativeLayout
-        android:id="@+id/text_and_image_container"
+        android:id="@+id/listViewLayoutContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingEnd="@dimen/padding"
@@ -28,13 +28,13 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/miwok_text_view"
+                android:id="@+id/notMiwokTranslationTextView"
                 style="@style/generalStyles"
                 android:gravity="bottom"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/default_text_view"
+                android:id="@+id/miwokTranslationTextView"
                 style="@style/generalStyles"
                 android:gravity="top" />
 
@@ -46,7 +46,7 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:src="@mipmap/play_arrow"
+            android:src="@mipmap/ic_play_arrow"
             tools:ignore="ContentDescription" />
 
     </RelativeLayout>
