@@ -26,23 +26,27 @@ class ColorsFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        // Inflate the layout for this fragment
-        val parentView = inflater.inflate(R.layout.word_list, container, false)
+        // Inflate and return the layout for this fragment
+        return inflater.inflate(R.layout.word_list, container, false)
+    }
 
-        activity!!.volumeControlStream = AudioManager.STREAM_MUSIC
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        activity?.volumeControlStream = AudioManager.STREAM_MUSIC
 
         // Create and setup the (@link AudioManager) to request audio focus
-        mAudioManager = activity!!.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        mAudioManager = activity?.getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
         mOnAudioFocusChangeListener = AudioManager.OnAudioFocusChangeListener { focusChange ->
             if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT || focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
                 // Pause playback
-                mMediaPlayer!!.pause()
-                mMediaPlayer!!.seekTo(0)
+                mMediaPlayer?.pause()
+                mMediaPlayer?.seekTo(0)
 
             } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
                 // Resume playback
-                mMediaPlayer!!.start()
+                mMediaPlayer?.start()
 
             } else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
                 // Stop playback
@@ -65,9 +69,9 @@ class ColorsFragment : Fragment() {
 
         mAdapter = WordAdapter(activity!!, mWords!!, R.color.category_colors)
 
-        wordListListView!!.adapter = mAdapter
+        wordListListView?.adapter = mAdapter
 
-        wordListListView!!.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
+        wordListListView?.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
             //Release the media player if it currently exists because we are about to
             //play a different sound file
             releaseMediaPlayer()
@@ -83,15 +87,13 @@ class ColorsFragment : Fragment() {
                 //Release the media player if it currently exists because we are about to
                 //play a different sound file
                 mMediaPlayer = MediaPlayer.create(activity, mWord!!.audioResourceId)
-                mMediaPlayer!!.start()
+                mMediaPlayer?.start()
 
                 //Setup a listener on the media player, so that we can stop and release the
                 //media player once the sounds has finished playing
-                mMediaPlayer!!.setOnCompletionListener(mCompletionListener)
+                mMediaPlayer?.setOnCompletionListener(mCompletionListener)
             }
         }
-
-        return parentView
     }
 
     /**
@@ -102,14 +104,14 @@ class ColorsFragment : Fragment() {
         if (mMediaPlayer != null) {
             // Regardless of the current state of the media player, release its resources
             // because we no longer need it.
-            mMediaPlayer!!.release()
+            mMediaPlayer?.release()
 
             // Set the media player back to null. For our code, we've decided that
             // setting the media player to null is an easy way to tell that the media player
             // is not configured to play an audio file at the moment.
             mMediaPlayer = null
 
-            mAudioManager!!.abandonAudioFocus(mOnAudioFocusChangeListener)
+            mAudioManager?.abandonAudioFocus(mOnAudioFocusChangeListener)
         }
     }
 
@@ -117,4 +119,4 @@ class ColorsFragment : Fragment() {
         super.onStop()
         releaseMediaPlayer()
     }
-}// Required empty public constructor
+}

@@ -26,23 +26,27 @@ class PhrasesFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        // Inflate the layout for this fragment
-        val parentView = inflater.inflate(R.layout.word_list, container, false)
+        // Inflate and return the layout for this fragment
+        return inflater.inflate(R.layout.word_list, container, false)
+    }
 
-        activity!!.volumeControlStream = AudioManager.STREAM_MUSIC
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        activity?.volumeControlStream = AudioManager.STREAM_MUSIC
 
         // Create and setup the (@link AudioManager) to request audio focus
-        audioManager = activity!!.getSystemService(Context.AUDIO_SERVICE) as AudioManager
+        audioManager = activity?.getSystemService(Context.AUDIO_SERVICE) as AudioManager
 
         onAudioFocusChangeListener = AudioManager.OnAudioFocusChangeListener { focusChange ->
             if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT || focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
                 // Pause playback
-                mediaPlayer!!.pause()
-                mediaPlayer!!.seekTo(0)
+                mediaPlayer?.pause()
+                mediaPlayer?.seekTo(0)
 
             } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
                 // Resume playback
-                mediaPlayer!!.start()
+                mediaPlayer?.start()
 
             } else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
                 // Stop playback
@@ -67,15 +71,15 @@ class PhrasesFragment : Fragment() {
 
         adapter = WordAdapter(activity!!, words!!, R.color.category_phrases)
 
-        wordListListView!!.adapter = adapter
-        wordListListView!!.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
+        wordListListView?.adapter = adapter
+        wordListListView?.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
             //Release the media player if it currently exists because we are about to
             //play a different sound file
             releaseMediaPlayer()
             word = words!![position]
 
             //Request audio focus for playback
-            val result = audioManager!!.requestAudioFocus(onAudioFocusChangeListener, AudioManager.STREAM_MUSIC,
+            val result = audioManager?.requestAudioFocus(onAudioFocusChangeListener, AudioManager.STREAM_MUSIC,
                     AudioManager.AUDIOFOCUS_GAIN_TRANSIENT)
 
             if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
@@ -84,15 +88,13 @@ class PhrasesFragment : Fragment() {
                 //play a different sound file
 
                 mediaPlayer = MediaPlayer.create(activity, word!!.audioResourceId)
-                mediaPlayer!!.start()
+                mediaPlayer?.start()
 
                 //Setup a listener on the media player, so that we can stop and release the
                 //media player once the sounds has finished playing
-                mediaPlayer!!.setOnCompletionListener(completionListener)
+                mediaPlayer?.setOnCompletionListener(completionListener)
             }
         }
-
-        return parentView
     }
 
     /**
@@ -103,14 +105,14 @@ class PhrasesFragment : Fragment() {
         if (mediaPlayer != null) {
             // Regardless of the current state of the media player, release its resources
             // because we no longer need it.
-            mediaPlayer!!.release()
+            mediaPlayer?.release()
 
             // Set the media player back to null. For our code, we've decided that
             // setting the media player to null is an easy way to tell that the media player
             // is not configured to play an audio file at the moment.
             mediaPlayer = null
 
-            audioManager!!.abandonAudioFocus(onAudioFocusChangeListener)
+            audioManager?.abandonAudioFocus(onAudioFocusChangeListener)
         }
     }
 
