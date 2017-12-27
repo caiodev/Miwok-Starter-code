@@ -17,18 +17,18 @@ class MainActivity : AppCompatActivity() {
         adapter = SimpleFragmentPagerAdapter(supportFragmentManager, applicationContext)
 
         // Set the adapter onto the view pager
-        view_pager.adapter = adapter
+        viewPager.adapter = adapter
 
-        sliding_tabs.setupWithViewPager(view_pager)
+        slidingTabs.setupWithViewPager(viewPager)
     }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)
 
         if (newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            sliding_tabs.tabMode = TabLayout.MODE_FIXED
+            slidingTabs.tabMode = TabLayout.MODE_FIXED
         } else if (newConfig.orientation == Configuration.ORIENTATION_PORTRAIT) {
-            sliding_tabs.tabMode = TabLayout.MODE_SCROLLABLE
+            slidingTabs.tabMode = TabLayout.MODE_SCROLLABLE
         }
     }
 }

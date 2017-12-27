@@ -8,7 +8,7 @@
     tools:context="com.example.android.miwok.MainActivity">
 
     <android.support.design.widget.TabLayout
-        android:id="@+id/sliding_tabs"
+        android:id="@+id/slidingTabs"
         style="@style/MyCustomTabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,7 +16,7 @@
         app:tabMode="scrollable" />
 
     <android.support.v4.view.ViewPager
-        android:id="@+id/view_pager"
+        android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />
