@@ -1,7 +1,7 @@
 Miwok App
 ===================================
 
-This app displays lists of vocabulary words for the user to learn the Miwok language.
+This app displays lists of native words for users to learn the Miwok language.
 
 License
 =======
